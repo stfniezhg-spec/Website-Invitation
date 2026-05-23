@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agness' 21st Birthday - VIP Invitation 🥂✨</title>
+    <!-- Google Fonts for Editorial Serifs & Vintage Scripts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=Pinyon+Script&family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Canvas Confetti Library for golden RSVP celebration -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Ambient background sound toggle -->
+    <button id="sound-toggle-btn" class="ambient-btn" title="Toggle Deep House Beats">
+        <i class="fa-solid fa-volume-xmark"></i>
+    </button>
+
+    <!-- Admin Access Key (Disabled) -->
+
+    <!-- Floating Navigation Indicators (Vintage Editorial Badges) -->
+    <nav class="navigation-badges">
+        <button class="nav-badge active" data-slide="0" title="Celebrate">CELEBRATE</button>
+        <button class="nav-badge" data-slide="1" title="Details">DETAILS</button>
+        <button class="nav-badge" data-slide="2" title="Dresscode">DRESSCODE</button>
+        <button class="nav-badge" data-slide="3" title="Agenda">AGENDA</button>
+        <button class="nav-badge" data-slide="4" title="RSVP">RSVP</button>
+    </nav>
+
+    <!-- Main Scrapbook Presentation Container -->
+    <main class="scrapbook-container">
+        
+        <!-- ================= SLIDE 1: INTRO (CELEBRATE) ================= -->
+        <section id="slide-intro" class="slide active">
+            <div class="vintage-flourish top-left">✦</div>
+            <div class="vintage-flourish top-right">✦</div>
+            <div class="vintage-flourish bottom-left">✦</div>
+            <div class="vintage-flourish bottom-right">✦</div>
+            
+            <div class="luxury-seal rotate-left">★ SPECIAL INVITATION ★</div>
+            <div class="luxury-seal rotate-right green-badge">RSVP REQUIRED</div>
+
+            <div class="slide-content intro-layout">
+                <!-- Monogram Logo -->
+                <div class="monogram-logo">
+                    <span id="display-monogram-initial">A</span>
+                </div>
+
+                <header class="luxury-header">
+                    <span class="sub-banner text-shine">LETS CELEBRATE</span>
+                    <h1 class="main-title serif-title">
+                        <span class="row-1 font-serif" id="display-headline">Agness' 21st Birthday</span>
+                    </h1>
+                </header>
+
+                <!-- Hero Editorial Painting -->
+                <div class="hero-wrapper">
+                    <div class="hero-frame">
+                        <img src="hero.png" alt="Vintage Painted Celebration" class="hero-image">
+                        <div class="vintage-stars-overlay">
+                            <span class="star-particle p1">✦</span>
+                            <span class="star-particle p2">✦</span>
+                            <span class="star-particle p3">✦</span>
+                            <span class="star-particle p4">✦</span>
+                        </div>
+                    </div>
+                    <div class="polaroid-caption font-serif" id="display-polaroid-caption">
+                        she was born ready
+                    </div>
+                </div>
+
+                <div class="intro-footer-text">
+                    <h2 class="genz-hype font-serif" id="display-intro-text">
+                        Hello birthday girl! ✨  
+The main character is turning 21.
+
+Since you’ve always wanted a club night worth remembering, we decided to play fairy godmother and make your wish come true. ✨
+
+Get ready for a night of flashing lights, loud music, and unforgettable memories. Dress glamorous, bold, and effortlessly hot.
+
+And… don’t forget your glass slippers. 🪩
+Attendance is mandatory.
+                    </h2>
+                </div>
+            </div>
+            
+            <div class="swipe-hint">
+                <span>SWIPE OR CLICK TO DISCOVER DETAILS</span>
+                <i class="fa-solid fa-chevron-down gold-glow bounce"></i>
+            </div>
+        </section>
+
+        <!-- ================= SLIDE 2: EVENT DETAILS ================= -->
+        <section id="slide-details" class="slide">
+            <div class="tape top-center"></div>
+            <div class="marble-bar-rim"></div>
+            
+            <div class="slide-content details-layout">
+                <h2 class="section-title font-serif gold-glow">✦ PARTY DETAILS ✦</h2>
+                <p class="section-subtitle font-serif italic">Tap the champagnes to reveal the night's itinerary!</p>
+                
+                <div class="champagne-bar-table">
+                    <!-- Glass Coupe Row (Interactive) -->
+                    <div class="champagne-grid" id="cup-triangle-interactive">
+                        <div class="glass-row">
+                            <div class="pong-cup champagne-coupe active" data-reveal="date" id="cup-1">
+                                <span class="cup-label">DATE</span>
+                                <div class="cup-liquid champagne-bubbles"></div>
+                            </div>
+                            <div class="pong-cup champagne-coupe active" data-reveal="time" id="cup-2">
+                                <span class="cup-label">TIME</span>
+                                <div class="cup-liquid champagne-bubbles"></div>
+                            </div>
+                            <div class="pong-cup champagne-coupe active" data-reveal="place" id="cup-3">
+                                <span class="cup-label">PLACE</span>
+                                <div class="cup-liquid champagne-bubbles"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Details Display Clipboard -->
+                <div class="details-clipboard-wrapper">
+                    <div class="details-clipboard luxury-leather-panel">
+                        <div class="clip gold-clip"></div>
+                        <div class="clipboard-paper ivory-sheet">
+                            <div id="intel-placeholder" class="intel-box active text-center">
+                                <i class="fa-solid fa-champagne-glasses gold-glow bounce-spin"></i>
+                                <h3 class="font-serif">SELECT A COUPE</h3>
+                                <p>Tap any crystal glass on the bar to reveal locations and details!</p>
+                            </div>
+                            
+                            <div id="intel-date" class="intel-box">
+                                <span class="sticky-note-pin gold-pin">✦</span>
+                                <h3 class="font-serif">THE DATE</h3>
+                                <p class="reveal-text font-serif" id="display-date">Monday, June 1st, 2026</p>
+                            </div>
+
+                            <div id="intel-time" class="intel-box">
+                                <span class="sticky-note-pin gold-pin">✦</span>
+                                <h3 class="font-serif">VIP RECEPTION</h3>
+                                <p class="reveal-text font-serif" id="display-time">9:00 PM MYT - LATE</p>
+                            </div>
+
+                            <div id="intel-place" class="intel-box">
+                                <span class="sticky-note-pin gold-pin">✦</span>
+                                <h3 class="font-serif">THE PLACE</h3>
+                                <p class="reveal-text font-serif" id="display-place">TBC</p>
+                                <p class="reveal-subtext montserrat-sub" id="display-address">TBC</p>
+                                <p class="reveal-subtext montserrat-sub" style="margin-top: 14px; text-transform: uppercase; font-size: 0.72rem; letter-spacing: 1px;">Click below to lock in the directions:</p>
+                                <a href="https://maps.google.com" target="_blank" class="maps-btn luxury-gold-btn" id="display-maps-link">
+                                    <i class="fa-solid fa-map-location-dot"></i> OPEN IN GOOGLE MAPS
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ================= SLIDE 3: DRESS CODE ================= -->
+        <section id="slide-dresscode" class="slide">
+            <div class="vintage-flourish top-left">✦</div>
+            <div class="vintage-flourish top-right">✦</div>
+            
+            <div class="slide-content dresscode-layout">
+                <h2 class="section-title font-serif gold-glow">✦ THE DRESSCODE ✦</h2>
+                <p class="section-subtitle font-serif italic">Retro Editorial Style Guidelines</p>
+ 
+                <!-- Scrapbook Photo Collage -->
+                <div class="dresscode-collage">
+                    <div class="collage-card tilt-left" onclick="this.classList.toggle('zoomed')">
+                        <div class="scrapbook-tape"></div>
+                        <img src="dress1.png" alt="Sleek Suits Reference">
+                        <span class="collage-tag font-serif">Cool Girl Style</span>
+                    </div>
+                    <div class="collage-card tilt-right" onclick="this.classList.toggle('zoomed')">
+                        <div class="scrapbook-tape"></div>
+                        <img src="dress2.png" alt="Satin & Velvet Reference">
+                        <span class="collage-tag font-serif">Hot Girl Style</span>
+                    </div>
+                    <div class="collage-card tilt-center" onclick="this.classList.toggle('zoomed')">
+                        <div class="scrapbook-tape"></div>
+                        <img src="dress3.png" alt="Toast Reference">
+                        <span class="collage-tag font-serif">Bold Makeup</span>
+                    </div>
+                    <div class="collage-card tilt-right-soft" onclick="this.classList.toggle('zoomed')">
+                        <div class="scrapbook-tape"></div>
+                        <img src="dress4.png" alt="Glam Details">
+                        <span class="collage-tag font-serif">Fashion Statement</span>
+                    </div>
+                </div>
+
+
+                <div class="clothing-badge-board">
+                    <span class="badge-item luxury-badge">DRESS CODE STRICTLY IMPOSED</span>
+                    <span class="badge-item luxury-badge no-sport-badge">NO SPORTSWEAR / CASUAL ATTIRE</span>
+                    <span class="badge-item luxury-badge style-badge">JAW-DROPPING PARTY ATTIRE ✅</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= SLIDE 4: THE AGENDA ================= -->
+        <section id="slide-agenda" class="slide">
+            <div class="vintage-flourish top-left">✦</div>
+            <div class="vintage-flourish top-right">✦</div>
+ 
+            <div class="slide-content agenda-layout">
+                <h2 class="section-title font-serif gold-glow">✦ THE AGENDA ✦</h2>
+                <p class="section-subtitle font-serif italic">Schedule and Checklists</p>
+                
+                <div class="agenda-panel">
+                    <!-- Retro Radio HIFI Tuner Soundboard -->
+                    <div class="interactive-soundboard elegant-synth-board">
+                        <h3 class="board-title font-serif gold-glow">ARE YOU READY?</h3>
+                        
+                        <div class="sound-switch-row">
+                            <label class="toggle-switch">
+                                <input type="checkbox" id="toggle-neon" checked>
+                                <span class="slider slider-gold"></span>
+                            </label>
+                            <span class="switch-label font-serif italic">COOLEST OUTFIT</span>
+                        </div>
+ 
+                        <div class="sound-switch-row">
+                            <label class="toggle-switch">
+                                <input type="checkbox" id="toggle-crowd">
+                                <span class="slider slider-gold"></span>
+                            </label>
+                            <span class="switch-label font-serif italic">CAMERAS, PB & POLAROIDS</span>
+                        </div>
+ 
+                        <div class="sound-switch-row">
+                            <label class="toggle-switch">
+                                <input type="checkbox" id="toggle-bass" checked>
+                                <span class="slider slider-gold"></span>
+                            </label>
+                            <span class="switch-label font-serif italic">PARTY ENERGY & BEST MOVES</span>
+                        </div>
+                    </div>
+ 
+                    <!-- Agenda Timeline -->
+                    <div class="agenda-timeline paper-scrap elegant-card">
+                        <h3 class="font-serif">TIMELINE</h3>
+                        <ul class="timeline-items font-serif" id="display-agenda-list">
+                            <!-- Populated dynamically by app.js -->
+                        </ul>
+                    </div>
+                </div>
+ 
+                <!-- Countdown Timer -->
+                <div class="countdown-wrapper elegant-countdown">
+                    <h4 class="font-serif gold-glow">COUNTDOWN TO THE PARTY</h4>
+                    <div id="party-countdown" class="countdown-timer">
+                        <div class="time-block"><span id="days" class="font-serif">00</span><label class="font-serif">DAYS</label></div>
+                        <div class="time-block"><span id="hours" class="font-serif">00</span><label class="font-serif">HRS</label></div>
+                        <div class="time-block"><span id="minutes" class="font-serif">00</span><label class="font-serif">MINS</label></div>
+                        <div class="time-block"><span id="seconds" class="font-serif">00</span><label class="font-serif">SECS</label></div>
+                    </div>
+                </div>
+ 
+            </div>
+        </section>
+
+        <!-- ================= SLIDE 5: OUTRO ================= -->
+        <section id="slide-outro" class="slide">
+            <div class="tape top-left"></div>
+            <div class="tape top-right"></div>
+            <div class="vintage-flourish top-left">✦</div>
+            <div class="vintage-flourish top-right">✦</div>
+
+            <div class="slide-content outro-layout">
+                <!-- Outro Monogram Crest -->
+                <div class="monogram-logo small-logo">
+                    <span id="display-monogram-initial-footer">A</span>
+                </div>
+                
+                <h2 class="outro-headline font-serif gold-glow" id="display-outro-title">LOCK IN YOUR NIGHT</h2>
+                <h3 class="outro-subtext font-serif italic" id="display-outro-subtitle">Don't be late. ave the drama for the dance floor!</h3>
+
+                <!-- RSVP Board -->
+                <div class="rsvp-board paper-scrap elegant-card">
+                    <h3 class="font-serif">ATTENDANCE CONFIRMATION</h3>
+                    <p class="rsvp-closing-date font-serif">See you under the flashing lights,birthday girl!</p>
+                    
+                    <div class="rsvp-buttons">
+                        <button id="rsvp-yes-btn" class="rsvp-btn yes luxury-gold-btn font-serif">
+                            <i class="fa-solid fa-champagne-glasses"></i> YES, I'M IN!
+                        </button>
+                        <button id="rsvp-no-btn" class="rsvp-btn no font-serif">
+                            NO, I'M SLEEPING IN 😴
+                        </button>
+                    </div>
+                </div>
+
+                <footer class="credits-footer">
+                    <p class="font-serif">Curated by your coolest friend.</p>
+                </footer>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- ================= NAAH NO WAY POPUP ================= -->
+    <div id="no-way-modal" class="modal">
+        <div class="modal-content no-way-dialog text-center">
+            <div class="no-way-img-wrapper" id="no-way-close-trigger">
+                <img src="no_way.png" alt="Naah, no way!" class="no-way-img">
+                <div class="no-way-tape"></div>
+            </div>
+            <p class="no-way-hint font-serif italic">NAAH AH UR COMIN BRUH!!! CLICK AGAIN 🥂</p>
+        </div>
+    </div>
+
+    <!-- Modals Removed -->
+
+    <script src="app.js"></script>
+</body>
+</html>
