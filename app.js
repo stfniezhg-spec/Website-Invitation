@@ -8,7 +8,7 @@ let appState = {
     passcode: "BEER",
     name: "Agness",
     monogram: "A",
-    heroWidth: "240",
+    heroWidth: "380",
     heroHeight: "320",
     age: "21",
     headline: "Agness' 21st Birthday",
@@ -100,8 +100,7 @@ function syncStateToUI() {
     // Hero image dimensions
     const heroImg = document.querySelector(".hero-image");
     if (heroImg) {
-        heroImg.style.setProperty("--hero-width", (appState.heroWidth || "240") + "px");
-        heroImg.style.setProperty("--hero-aspect-ratio", `${appState.heroWidth || "240"} / ${appState.heroHeight || "300"}`);
+        heroImg.style.setProperty("--hero-width", (appState.heroWidth || "380") + "px");
     }
 
     // Display elements updates

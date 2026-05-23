@@ -371,10 +371,9 @@ body {
     transform: scale(1.02) rotate(0.5deg);
 }
 .hero-image {
-    width: var(--hero-width, 280px);
-    max-width: 100%;
+    width: 100%;
+    max-width: var(--hero-width, 380px);
     height: auto;
-    aspect-ratio: var(--hero-aspect-ratio, 280 / 320);
     object-fit: contain;
     display: block;
     max-height: 80vh;
