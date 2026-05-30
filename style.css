@@ -36,14 +36,17 @@
     margin: 0; padding: 0; box-sizing: border-box;
 }
 
-html { scroll-behavior: smooth; }
+html {
+    scroll-behavior: smooth;
+    overflow-x: hidden;
+    -webkit-overflow-scrolling: touch;
+}
 
 body {
     background: var(--bg);
     color: var(--text-light);
     font-family: var(--sans);
     font-size: 15px;
-    overflow-x: hidden;
     min-height: 100vh;
     background-image:
         radial-gradient(ellipse 70% 50% at 50% 0%, rgba(201,168,91,0.15) 0%, transparent 70%),
