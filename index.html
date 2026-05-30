@@ -21,8 +21,8 @@
         <i class="fa-solid fa-volume-xmark"></i>
     </button>
 
-    <!-- Hidden background media player (using video tag to support MP4 audio playback on iOS Safari) -->
-    <video id="bg-music" src="song.mp4" loop playsinline style="display: none;"></video>
+    <!-- Hidden background media player (styled to bypass iOS Safari display:none rendering block) -->
+    <audio id="bg-music" src="song.mp3" loop style="position: absolute; width: 1px; height: 1px; opacity: 0.01; pointer-events: none; z-index: -999;"></audio>
 
     <!-- Admin Access Key (Disabled) -->
 

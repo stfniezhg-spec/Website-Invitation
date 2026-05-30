@@ -419,6 +419,7 @@ function setupSoundboard() {
             initAudioContext();
             
             if (bgMusic) {
+                bgMusic.muted = false;
                 bgMusic.play().catch(e => console.log("Audio play blocked by browser policy: ", e));
             }
             playCrystalClinkSound();
@@ -611,6 +612,7 @@ function setupAutoplay() {
 
     function startMusic() {
         if (bgMusic && bgMusic.paused && !interactionAttempted) {
+            bgMusic.muted = false;
             bgMusic.play()
                 .then(() => {
                     // Audio played successfully, sync UI toggle button states

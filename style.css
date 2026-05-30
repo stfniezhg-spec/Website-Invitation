@@ -38,8 +38,6 @@
 
 html {
     scroll-behavior: smooth;
-    overflow-x: hidden;
-    -webkit-overflow-scrolling: touch;
 }
 
 body {
@@ -192,6 +190,7 @@ body {
     align-items: flex-start;
     justify-content: center;
     position: relative;
+    overflow-x: hidden;
 }
 
 /* ── SLIDES ── */
