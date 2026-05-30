@@ -406,6 +406,7 @@ function setupChampagneReveal() {
 function setupSoundboard() {
     const soundToggle = document.getElementById("sound-toggle-btn");
     const icon = soundToggle.querySelector("i");
+    const bgMusic = document.getElementById("bg-music");
 
     soundToggle.addEventListener("click", () => {
         if (icon.classList.contains("fa-volume-xmark")) {
@@ -414,13 +415,17 @@ function setupSoundboard() {
             soundToggle.classList.add("active");
             initAudioContext();
             
-            startSynthBeat();
+            if (bgMusic) {
+                bgMusic.play().catch(e => console.log("Audio play blocked by browser policy: ", e));
+            }
             playCrystalClinkSound();
         } else {
             icon.classList.remove("fa-volume-high");
             icon.classList.add("fa-volume-xmark");
             soundToggle.classList.remove("active");
-            stopSynthBeat();
+            if (bgMusic) {
+                bgMusic.pause();
+            }
         }
     });
 
