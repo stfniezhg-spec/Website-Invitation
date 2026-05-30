@@ -11,19 +11,19 @@ let appState = {
     heroWidth: "380",
     heroHeight: "320",
     age: "21",
-    headline: "Agness' 21st Birthday",
+    headline: "Agness' <span class=\"birthday-number\">21</span><span class=\"birthday-suffix\">st</span> Birthday",
     polaroidCaption: "she was born ready",
     introText: "Hello birthday girl! ✨\nThe main character is turning 21.\n\nSince you’ve always wanted a club night worth remembering, we decided to play fairy godmother and make your wish come true. ✨\n\nGet ready for a night of flashing lights, loud music, and unforgettable memories. Dress glamorous, bold, and effortlessly hot.\n\nAnd… don’t forget your glass slippers. 🪩\nAttendance is mandatory.",
     date: "Monday, June 1st, 2026",
     time: "9:00 PM MYT - LATE",
-    place: "TBC",
-    address: "TBC",
-    mapsLink: "https://maps.google.com",
+    place: "kyō kuala lumpur",
+    address: "Mandarin Oriental, KLCC",
+    mapsLink: "https://maps.app.goo.gl/2FXkpfXgYzYKQetm6",
     dressMale: "",
     dressFemale: "",
-    agendaList: "8:00 PM | Chauffeur Arrives\n9:00 PM | Champagne Greeting\n9:30 PM | VIP Lounge Kickoff\n10:30 PM | High-Fashion DJ Set\n12:00 AM | Cake & Toast 🥂",
+    agendaList: "be in ly2 g floor by 8.30",
     outroTitle: "LOCK IN YOUR NIGHT",
-    outroSubtitle: "Don't be late. ave the drama for the dance floor!",
+    outroSubtitle: "Don't be late. Save the drama for the dance floor!",
     rsvpContact: "+601172474764"
 };
 
@@ -104,7 +104,7 @@ function syncStateToUI() {
     }
 
     // Display elements updates
-    document.getElementById("display-headline").innerText = appState.headline;
+    document.getElementById("display-headline").innerHTML = appState.headline;
     const displayAge = document.getElementById("display-age");
     if (displayAge) displayAge.innerText = appState.age;
     document.getElementById("display-polaroid-caption").innerText = appState.polaroidCaption;
@@ -126,42 +126,44 @@ function syncStateToUI() {
 
     // Render Agenda Timeline
     const vibeListContainer = document.getElementById("display-agenda-list");
-    vibeListContainer.innerHTML = "";
-    appState.agendaList.split("\n").forEach(item => {
-        if (item.trim()) {
-            const li = document.createElement("li");
-            li.className = "timeline-item";
-            
-            // Check for separator | or -
-            let timeStr = "";
-            let textStr = item;
-            
-            const separators = ["|", " - ", " : "];
-            for (let sep of separators) {
-                if (item.includes(sep)) {
-                    const parts = item.split(sep);
-                    timeStr = parts[0].trim();
-                    textStr = parts.slice(1).join(sep).trim();
-                    break;
+    if (vibeListContainer) {
+        vibeListContainer.innerHTML = "";
+        appState.agendaList.split("\n").forEach(item => {
+            if (item.trim()) {
+                const li = document.createElement("li");
+                li.className = "timeline-item";
+                
+                // Check for separator | or -
+                let timeStr = "";
+                let textStr = item;
+                
+                const separators = ["|", " - ", " : "];
+                for (let sep of separators) {
+                    if (item.includes(sep)) {
+                        const parts = item.split(sep);
+                        timeStr = parts[0].trim();
+                        textStr = parts.slice(1).join(sep).trim();
+                        break;
+                    }
                 }
+                
+                if (timeStr) {
+                    li.innerHTML = `
+                        <span class="timeline-time font-serif">${timeStr}</span>
+                        <span class="timeline-dot"></span>
+                        <span class="timeline-text font-serif">${textStr}</span>
+                    `;
+                } else {
+                    li.innerHTML = `
+                        <span class="timeline-time font-serif">✦</span>
+                        <span class="timeline-dot"></span>
+                        <span class="timeline-text font-serif">${textStr}</span>
+                    `;
+                }
+                vibeListContainer.appendChild(li);
             }
-            
-            if (timeStr) {
-                li.innerHTML = `
-                    <span class="timeline-time font-serif">${timeStr}</span>
-                    <span class="timeline-dot"></span>
-                    <span class="timeline-text font-serif">${textStr}</span>
-                `;
-            } else {
-                li.innerHTML = `
-                    <span class="timeline-time font-serif">✦</span>
-                    <span class="timeline-dot"></span>
-                    <span class="timeline-text font-serif">${textStr}</span>
-                `;
-            }
-            vibeListContainer.appendChild(li);
-        }
-    });
+        });
+    }
 
     // Admin Customizer inputs removed from DOM
 }
@@ -216,21 +218,13 @@ function setupNavigation() {
             return; // Skip page transition
         }
 
-        if (Math.abs(deltaX) > Math.abs(deltaY)) {
-            if (Math.abs(deltaX) > 60) {
-                if (deltaX < 0 && currentSlideIndex < slides.length - 1) {
-                    goToSlide(currentSlideIndex + 1);
-                } else if (deltaX > 0 && currentSlideIndex > 0) {
-                    goToSlide(currentSlideIndex - 1);
-                }
-            }
-        } else {
-            if (Math.abs(deltaY) > 60) {
-                if (deltaY < 0 && currentSlideIndex < slides.length - 1) {
-                    goToSlide(currentSlideIndex + 1);
-                } else if (deltaY > 0 && currentSlideIndex > 0) {
-                    goToSlide(currentSlideIndex - 1);
-                }
+        // Only transition slides on horizontal swipe (X-axis)
+        // This leaves vertical scrolling (Y-axis) completely to native browser scrolling so users can read content.
+        if (Math.abs(deltaX) > Math.abs(deltaY) && Math.abs(deltaX) > 60) {
+            if (deltaX < 0 && currentSlideIndex < slides.length - 1) {
+                goToSlide(currentSlideIndex + 1);
+            } else if (deltaX > 0 && currentSlideIndex > 0) {
+                goToSlide(currentSlideIndex - 1);
             }
         }
     }
@@ -507,7 +501,7 @@ function setupRSVP() {
             if (isNaN(appState.rsvpContact)) {
                 contactLink = appState.rsvpContact;
             }
-            window.open(contactLink, "_blank");
+            window.location.href = contactLink;
         }, 1500);
     });
 

@@ -333,6 +333,19 @@ body {
     letter-spacing: 3px;
     text-transform: uppercase;
 }
+.birthday-number {
+    font-variant-numeric: lining-nums;
+    font-feature-settings: "lnum" 1;
+    font-size: 1.22em;
+    display: inline-block;
+    vertical-align: middle;
+}
+.birthday-suffix {
+    font-size: 0.55em;
+    vertical-align: super;
+    text-transform: uppercase;
+    margin-left: 1px;
+}
 .main-title .highlighted {
     font-family: var(--serif-body);
     font-style: italic;
