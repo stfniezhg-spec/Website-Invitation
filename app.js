@@ -14,7 +14,7 @@ let appState = {
     headline: "Agness' <span class=\"birthday-number\">21</span><span class=\"birthday-suffix\">st</span> Birthday",
     polaroidCaption: "she was born ready",
     introText: "Hello birthday girl! ✨\nThe main character is turning 21.\n\nSince you’ve always wanted a club night worth remembering, we decided to play fairy godmother and make your wish come true. ✨\n\nGet ready for a night of flashing lights, loud music, and unforgettable memories. Dress glamorous, bold, and effortlessly hot.\n\nAnd… don’t forget your glass slippers. 🪩\nAttendance is mandatory.",
-    date: "Monday, June 1st, 2026",
+    date: "Sunday, 31 May 2026",
     time: "9:00 PM MYT - LATE",
     place: "kyō kuala lumpur",
     address: "Mandarin Oriental, KLCC",
@@ -469,30 +469,36 @@ function setupRSVP() {
         setTimeout(() => playSynthSound(880.00, "sine", 0.15, 0.12), 200); // A5
         setTimeout(() => playSynthSound(1100.00, "sine", 0.35, 0.12), 300); // C#6
         
-        // Shiny gold champagne-colored confetti splash
-        const end = Date.now() + (2 * 1000);
-        const colors = ['#dfba73', '#ffffff', '#b8924b', '#f4dfb5'];
+        // Shiny gold champagne-colored confetti splash (wrapped in typeof check for safety)
+        if (typeof confetti === "function") {
+            try {
+                const end = Date.now() + (2 * 1000);
+                const colors = ['#dfba73', '#ffffff', '#b8924b', '#f4dfb5'];
 
-        (function frame() {
-            confetti({
-                particleCount: 6,
-                angle: 60,
-                spread: 60,
-                origin: { x: 0 },
-                colors: colors
-            });
-            confetti({
-                particleCount: 6,
-                angle: 120,
-                spread: 60,
-                origin: { x: 1 },
-                colors: colors
-            });
+                (function frame() {
+                    confetti({
+                        particleCount: 6,
+                        angle: 60,
+                        spread: 60,
+                        origin: { x: 0 },
+                        colors: colors
+                    });
+                    confetti({
+                        particleCount: 6,
+                        angle: 120,
+                        spread: 60,
+                        origin: { x: 1 },
+                        colors: colors
+                    });
 
-            if (Date.now() < end) {
-                requestAnimationFrame(frame);
+                    if (Date.now() < end) {
+                        requestAnimationFrame(frame);
+                    }
+                }());
+            } catch (e) {
+                console.warn("Confetti failed to run: ", e);
             }
-        }());
+        }
 
         // Open custom SMS/WhatsApp text response link
         setTimeout(() => {
@@ -530,11 +536,19 @@ function setupRSVP() {
 // ==========================================
 function startCountdown() {
     function updateClock() {
-        let targetDate = new Date("2026-06-01T21:00:00");
+        let targetDate = new Date("2026-05-31T21:00:00");
         
         try {
             // Clean up ordinal suffixes (1st, 2nd, etc.)
             let dateStr = appState.date.replace(/(\d+)(st|nd|rd|th)/g, "$1");
+            // Remove day of week (e.g. Sunday, Monday)
+            dateStr = dateStr.replace(/(Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday|Mon|Tue|Wed|Thu|Fri|Sat|Sun),?\s*/gi, "");
+            
+            // Reorder "31 May 2026" to standard "May 31, 2026" if it starts with a number
+            const match = dateStr.match(/^(\d+)\s+([a-zA-Z]+)\s+(\d{4})/);
+            if (match) {
+                dateStr = `${match[2]} ${match[1]}, ${match[3]}`;
+            }
             
             // Try to extract time (e.g. 9:00 PM)
             const timeMatch = appState.time.match(/(\d+:\d+\s*(?:AM|PM))/i);
