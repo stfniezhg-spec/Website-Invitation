@@ -56,6 +56,9 @@ window.addEventListener("DOMContentLoaded", () => {
 
     // 8. Start Countdown
     startCountdown();
+
+    // 9. Attempt Autoplay on first interaction
+    setupAutoplay();
 });
 
 // ==========================================
@@ -595,3 +598,55 @@ function startCountdown() {
 // ==========================================
 // Admin panel and customization features disabled
 function setupAdminPanel() {}
+
+// ==========================================
+// AUDIO AUTOPLAY MANAGER (Workaround for modern browser policies)
+// ==========================================
+function setupAutoplay() {
+    const bgMusic = document.getElementById("bg-music");
+    const soundToggle = document.getElementById("sound-toggle-btn");
+    const icon = soundToggle ? soundToggle.querySelector("i") : null;
+
+    let interactionAttempted = false;
+
+    function startMusic() {
+        if (bgMusic && bgMusic.paused && !interactionAttempted) {
+            bgMusic.play()
+                .then(() => {
+                    // Audio played successfully, sync UI toggle button states
+                    interactionAttempted = true;
+                    if (icon) {
+                        icon.classList.remove("fa-volume-xmark");
+                        icon.classList.add("fa-volume-high");
+                    }
+                    if (soundToggle) {
+                        soundToggle.classList.add("active");
+                    }
+                    initAudioContext();
+                    removeListeners();
+                })
+                .catch(err => {
+                    // Autoplay blocked by browser policy; wait for user input
+                    console.log("Autoplay blocked by browser. Awaiting interaction. Error: ", err);
+                });
+        }
+    }
+
+    // Try playing immediately (might work if user came from a domain they engaged with before)
+    startMusic();
+
+    // Listeners to trigger playback on first user gesture anywhere
+    function handleGesture() {
+        startMusic();
+    }
+
+    document.addEventListener("click", handleGesture, { once: true });
+    document.addEventListener("touchstart", handleGesture, { once: true });
+    document.addEventListener("keydown", handleGesture, { once: true });
+
+    function removeListeners() {
+        document.removeEventListener("click", handleGesture);
+        document.removeEventListener("touchstart", handleGesture);
+        document.removeEventListener("keydown", handleGesture);
+    }
+}
